@@ -22,7 +22,7 @@ install_java_with_overlay ${BUILD_DIR}
 
 WILDFLY_VERSION="11.0.0.Final"
 WILDFLY_SHA1="0e89fe0860a87bfd6b09379ee38d743642edfcfb"
-JBOSS_HOME=".jboss/wildfly-${WILDFLY_VERSION}"
+JBOSS_HOME="${BUILD_DIR}/.jboss/wildfly-${WILDFLY_VERSION}"
 
 cd $BUILD_DIR
 
