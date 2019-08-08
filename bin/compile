@@ -21,7 +21,7 @@ curl --retry 3 --silent --location $JVM_COMMON_BUILDPACK | tar xzm -C /tmp/jvm-c
 install_java_with_overlay ${BUILD_DIR}
 
 WILDFLY_VERSION="11.0.0.Final"
-WILDFLY_SHA1="da39a3ee5e6b4b0d3255bfef95601890afd80709"
+WILDFLY_SHA1="0e89fe0860a87bfd6b09379ee38d743642edfcfb"
 JBOSS_HOME=".jboss/wildfly-${WILDFLY_VERSION}"
 
 cd $BUILD_DIR
@@ -36,9 +36,10 @@ echo "downloaded"
 
 WILDFLY_FILE="wildfly-${WILDFLY_VERSION}.tar.gz"
 echo -n "-----> Calculating sha1sum over ${WILDFLY_FILE}... "
-sha1sum wildfly-$WILDFLY_VERSION.tar.gz | grep $WILDFLY_SHA1 > /dev/null 2>&1
 SHA1="$(sha1sum $WILDFLY_FILE)"
-echo "verified (${SHA1})"
+echo $SHA1
+sha1sum wildfly-$WILDFLY_VERSION.tar.gz | grep $WILDFLY_SHA1 > /dev/null 2>&1
+echo "verified "
 tar xf wildfly-$WILDFLY_VERSION.tar.gz
 echo "extracted"
 mv wildfly-$WILDFLY_VERSION $JBOSS_HOME
