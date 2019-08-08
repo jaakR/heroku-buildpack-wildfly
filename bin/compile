@@ -60,6 +60,8 @@ web: \$JBOSS_HOME/bin/standalone.sh -b=0.0.0.0 -bmanagement 0.0.0.0 -Djboss.http
 EOF
 fi
 
+echo "$(ls "${JBOSS_HOME}/wildfly-11.0.0.Final")"
+
 echo -n "-----> Exporting JBOSS_HOME ${JBOSS_HOME}... "
 cat << EOF > $BUILD_DIR/.profile.d/jboss.sh
 export JBOSS_HOME=${JBOSS_HOME}
