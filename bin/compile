@@ -26,11 +26,15 @@ JBOSS_HOME=".jboss/wildfly-${WILDFLY_VERSION}"
 
 cd $BUILD_DIR
 
+echo "Build dir for wildfly is ${BUILD_DIR}"
+
 mkdir -p .jboss
 
 echo -n "-----> Installing Wildfly ${WILDFLY_VERSION}... "
 curl -O http://download.jboss.org/wildfly/$WILDFLY_VERSION/wildfly-$WILDFLY_VERSION.tar.gz
 echo "downloaded"
+
+echo -n "-----> Calculated SHA1 for Wildfly ${sha1sum wildfly-$WILDFLY_VERSION.tar.gz}... "
 sha1sum wildfly-$WILDFLY_VERSION.tar.gz | grep $WILDFLY_SHA1 > /dev/null 2>&1
 echo "verified"
 tar xf wildfly-$WILDFLY_VERSION.tar.gz
@@ -53,6 +57,7 @@ web: \$JBOSS_HOME/bin/standalone.sh -b=0.0.0.0 -bmanagement 0.0.0.0 -Djboss.http
 EOF
 fi
 
+echo -n "-----> Exporting JBOSS_HOME ${JBOSS_HOME}... "
 cat << EOF > $BUILD_DIR/.profile.d/jboss.sh
 export JBOSS_HOME=${JBOSS_HOME}
 EOF
