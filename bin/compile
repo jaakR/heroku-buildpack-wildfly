@@ -73,13 +73,13 @@ PROXY_PORT="$(cat "${ENV_DIR}/PROXY_PORT")"
 PROXY_USERNAME="$(cat "${ENV_DIR}/PROXY_USERNAME")"
 PROXY_PASSWORD="$(cat "${ENV_DIR}/PROXY_PASSWORD")"
 
-echo -n "-----> exporting PROXY_HOST ${PROXY_HOST}... "
+#echo -n "-----> exporting PROXY_HOST ${PROXY_HOST}... "
 export PROXY_HOST="$(cat "${ENV_DIR}/PROXY_HOST")"
-echo -n "-----> exporting PROXY_PORT ${PROXY_PORT}... "
+#echo -n "-----> exporting PROXY_PORT ${PROXY_PORT}... "
 export PROXY_PORT="$(cat "${ENV_DIR}/PROXY_PORT")"
-echo -n "-----> exporting PROXY_USERNAME ${PROXY_USERNAME}... "
+#echo -n "-----> exporting PROXY_USERNAME ${PROXY_USERNAME}... "
 export PROXY_USERNAME="$(cat "${ENV_DIR}/PROXY_USERNAME")"
-echo -n "-----> exporting PROXY_PASSWORD ${PROXY_PASSWORD}... "
+#echo -n "-----> exporting PROXY_PASSWORD ${PROXY_PASSWORD}... "
 export PROXY_PASSWORD="$(cat "${ENV_DIR}/PROXY_PASSWORD")"
 
 
