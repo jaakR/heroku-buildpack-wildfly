@@ -51,12 +51,26 @@ echo -n "-----> Deploying war file(s)... "
 cp target/*.war $JBOSS_HOME/standalone/deployments/
 echo "done"
 
+PROXY_HOST="$(cat "${ENV_DIR}/PROXY_HOST")"
+PROXY_PORT="$(cat "${ENV_DIR}/PROXY_PORT")"
+PROXY_USERNAME="$(cat "${ENV_DIR}/PROXY_USERNAME")"
+PROXY_PASSWORD="$(cat "${ENV_DIR}/PROXY_PASSWORD")"
+
+echo -n "-----> exporting PROXY_HOST ${PROXY_HOST}... "
+export PROXY_HOST="$(cat "${ENV_DIR}/PROXY_HOST")"
+echo -n "-----> exporting PROXY_PORT ${PROXY_PORT}... "
+export PROXY_PORT="$(cat "${ENV_DIR}/PROXY_PORT")"
+echo -n "-----> exporting PROXY_USERNAME ${PROXY_USERNAME}... "
+export PROXY_USERNAME="$(cat "${ENV_DIR}/PROXY_USERNAME")"
+echo -n "-----> exporting PROXY_PASSWORD ${PROXY_PASSWORD}... "
+export PROXY_PASSWORD="$(cat "${ENV_DIR}/PROXY_PASSWORD")"
+
 echo "-----> Creating configuration..."
 if [ -f $BUILD_DIR/Procfile ]; then
   echo "        - Using existing process types"
 else
   cat << EOF > $BUILD_DIR/Procfile
-web: \$JBOSS_HOME/bin/standalone.sh -b=0.0.0.0 -bmanagement 0.0.0.0 -Djboss.http.port=\$PORT
+web: \$JBOSS_HOME/bin/standalone.sh -b=0.0.0.0 -bmanagement 0.0.0.0 -Djboss.http.port=\$PORT -Dhttp.proxyHost=\$PROXY_HOST -Dhttp.proxyPort=\$PROXY_PORT Dhttps.proxyUser=\$PROXY_USER -Dhttps.proxyPassword=\$PROXY_PASSWORD
 EOF
 fi
 
@@ -66,20 +80,5 @@ echo -n "-----> Exporting JBOSS_HOME ${JBOSS_HOME}... "
 cat << EOF > $BUILD_DIR/.profile.d/jboss.sh
 export JBOSS_HOME=${JBOSS_HOME}
 EOF
-
-
-PROXY_HOST="$(cat "${ENV_DIR}/PROXY_HOST")"
-PROXY_PORT="$(cat "${ENV_DIR}/PROXY_PORT")"
-PROXY_USERNAME="$(cat "${ENV_DIR}/PROXY_USERNAME")"
-PROXY_PASSWORD="$(cat "${ENV_DIR}/PROXY_PASSWORD")"
-
-#echo -n "-----> exporting PROXY_HOST ${PROXY_HOST}... "
-export PROXY_HOST="$(cat "${ENV_DIR}/PROXY_HOST")"
-#echo -n "-----> exporting PROXY_PORT ${PROXY_PORT}... "
-export PROXY_PORT="$(cat "${ENV_DIR}/PROXY_PORT")"
-#echo -n "-----> exporting PROXY_USERNAME ${PROXY_USERNAME}... "
-export PROXY_USERNAME="$(cat "${ENV_DIR}/PROXY_USERNAME")"
-#echo -n "-----> exporting PROXY_PASSWORD ${PROXY_PASSWORD}... "
-export PROXY_PASSWORD="$(cat "${ENV_DIR}/PROXY_PASSWORD")"
 
 
