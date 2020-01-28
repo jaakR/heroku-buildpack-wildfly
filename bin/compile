@@ -70,7 +70,7 @@ if [ -f $BUILD_DIR/Procfile ]; then
   echo "        - Using existing process types"
 else
   cat << EOF > $BUILD_DIR/Procfile
-web: \$JBOSS_HOME/bin/standalone.sh -b=0.0.0.0 -bmanagement 0.0.0.0 -Djboss.http.port=\$PORT -Dhttp.proxyHost=\$PROXY_HOST -Dhttp.proxyPort=\$PROXY_PORT Dhttp.proxyUser=\$PROXY_USER -Dhttp.proxyPassword=\$PROXY_PASSWORD -Dhttps.proxyHost=\$PROXY_HOST -Dhttps.proxyPort=\$PROXY_PORT Dhttps.proxyUser=\$PROXY_USER -Dhttps.proxyPassword=\$PROXY_PASSWORD
+web: \$JBOSS_HOME/bin/standalone.sh -b=0.0.0.0 -bmanagement=0.0.0.0
 EOF
 fi
 
